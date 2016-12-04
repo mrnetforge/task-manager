@@ -3,12 +3,6 @@ import { NavController } from 'ionic-angular';
 import { AngularFire, AuthProviders, AuthMethods } from 'angularfire2';
 import { HomePage } from '../home/home';
 
-/*
-  Generated class for the Register page.
-
-  See http://ionicframework.com/docs/v2/components/#navigation for more info on
-  Ionic pages and navigation.
-*/
 @Component({
   selector: 'page-register',
   templateUrl: 'register.html'

@@ -9,6 +9,8 @@ import { ProfilePage } from '../pages/profile/profile';
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 import { RegisterPage } from '../pages/register/register';
+import { GroupsPage } from '../pages/groups/groups';
+import { GroupPage } from '../pages/groups/form/group';
 @NgModule({
   declarations: [
     MyApp,
@@ -17,7 +19,9 @@ import { RegisterPage } from '../pages/register/register';
     ProfilePage,
     RegisterPage,
     HomePage,
-    LoginPage
+    LoginPage,
+    GroupsPage,
+    GroupPage
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -36,7 +40,9 @@ import { RegisterPage } from '../pages/register/register';
     ProfilePage,
     RegisterPage,
     HomePage,
-    LoginPage
+    LoginPage,
+    GroupsPage,
+    GroupPage
   ],
   providers: [
     {
