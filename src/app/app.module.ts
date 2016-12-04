@@ -1,39 +1,44 @@
 import { NgModule, ErrorHandler } from '@angular/core';
-import {AuthHttp, AuthConfig} from 'angular2-jwt';
-import {Http} from '@angular/http';
+import { AngularFireModule } from 'angularfire2';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { Page1 } from '../pages/page1/page1';
 import { Page2 } from '../pages/page2/page2';
+
 import { ProfilePage } from '../pages/profile/profile';
-import {AuthService} from './services/auth/auth';
-export function getAuthHttp(http) {
-  return new AuthHttp(new AuthConfig(), http);
-}
+import { HomePage } from '../pages/home/home';
+import { LoginPage } from '../pages/login/login';
+import { RegisterPage } from '../pages/register/register';
 @NgModule({
   declarations: [
     MyApp,
     Page1,
     Page2,
-    ProfilePage
+    ProfilePage,
+    RegisterPage,
+    HomePage,
+    LoginPage
   ],
   imports: [
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp),
+    AngularFireModule.initializeApp({
+      apiKey: "AIzaSyAr5Bjhl1Rb8hDKfEVZQ6rfuiz2HGxwYXY",
+      authDomain: "todo-manager-13f73.firebaseapp.com",
+      databaseURL: "https://todo-manager-13f73.firebaseio.com",
+      storageBucket: "todo-manager-13f73.appspot.com"
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
     Page1,
     Page2,
-    ProfilePage
+    ProfilePage,
+    RegisterPage,
+    HomePage,
+    LoginPage
   ],
   providers: [
-    {
-      provide: AuthHttp,
-      useFactory: getAuthHttp,
-      deps: [Http]
-    },
-    AuthService,
     {
       provide: ErrorHandler, 
       useClass: IonicErrorHandler
