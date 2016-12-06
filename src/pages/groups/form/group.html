@@ -3,9 +3,57 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>{{ title }}</ion-title>
+    <ion-title>{{ (!edit) ? 'Stwórz grupę' : (group | async)?.name }}</ion-title>
   </ion-navbar>
 </ion-header>
 <ion-content padding>
-
+  <ion-segment [(ngModel)]="type">
+    <ion-segment-button value="basic">
+      Grupa
+    </ion-segment-button>
+    <ion-segment-button value="members">
+      Członkowie
+    </ion-segment-button>
+  </ion-segment>
+  <div [ngSwitch]="type">
+    <ion-list *ngSwitchCase="'basic'">
+      <ion-item>
+        <ion-label floating>Tytuł</ion-label>
+        <ion-input [ngModel]="(group | async)?.name" type="text" value="" disabled="true"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Opis</ion-label>
+        <ion-textarea rows="6" [ngModel]="(group | async)?.description" disabled="true"></ion-textarea>
+      </ion-item>
+    </ion-list>
+    <div *ngSwitchCase="'members'">
+      <ion-list>
+  <ion-item-sliding *ngFor="let member of members">
+    <ion-item>
+      <ion-avatar item-left>
+        <img src="https://ionicframework.com/dist/preview-app/www/assets/img/venkman.jpg">
+      </ion-avatar>
+      <h2>Slimer</h2>
+      <p>5 dni temu (Admin)</p>
+    </ion-item>
+    <ion-item-options side="left">
+      <button ion-button color="primary">
+        <ion-icon name="text"></ion-icon>
+        Text
+      </button>
+      <button ion-button color="secondary">
+        <ion-icon name="call"></ion-icon>
+        Call
+      </button>
+    </ion-item-options>
+    <ion-item-options side="right">
+      <button ion-button color="primary">
+        <ion-icon name="mail"></ion-icon>
+        Email
+      </button>
+    </ion-item-options>
+  </ion-item-sliding>
+</ion-list>
+    </div>
+  </div>
 </ion-content>

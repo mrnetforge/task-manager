@@ -4,13 +4,14 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { Page1 } from '../pages/page1/page1';
 import { Page2 } from '../pages/page2/page2';
-
+import {MomentModule} from 'angular2-moment';
 import { ProfilePage } from '../pages/profile/profile';
 import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 import { RegisterPage } from '../pages/register/register';
 import { GroupsPage } from '../pages/groups/groups';
 import { GroupPage } from '../pages/groups/form/group';
+import { ExponentialStrengthPipe }from '../pages/groups/filter';
 @NgModule({
   declarations: [
     MyApp,
@@ -21,7 +22,8 @@ import { GroupPage } from '../pages/groups/form/group';
     HomePage,
     LoginPage,
     GroupsPage,
-    GroupPage
+    GroupPage,
+    ExponentialStrengthPipe
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -30,7 +32,8 @@ import { GroupPage } from '../pages/groups/form/group';
       authDomain: "todo-manager-13f73.firebaseapp.com",
       databaseURL: "https://todo-manager-13f73.firebaseio.com",
       storageBucket: "todo-manager-13f73.appspot.com"
-    })
+    }),
+    MomentModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
