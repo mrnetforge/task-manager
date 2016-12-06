@@ -16,7 +16,22 @@ export class GroupPage {
   constructor(public af: AngularFire,private navParams: NavParams,public navCtrl: NavController) {
      let group_key: any = navParams.data.group_key;
      if(group_key) {
-       this.group = this.af.database.object('/groups/' + group_key);
+       this.af.database.object('/groups/' + group_key,{ preserveSnapshot: true }).subscribe(snapshot => {
+         this.group = snapshot.val();
+         console.log(this.group);
+         if(this.group['members']){
+           this.group['membersList'] = [];
+          for (var key in this.group['members']) {
+            if(this.group['members'][key]){
+              this.af.database.object('/users/' + key,{ preserveSnapshot: true }).subscribe(snapshot => {
+                this.group['membersList'].push(snapshot.val());
+              });
+            }
+          }
+         }
+         
+       });
+       //this.group = this.af.database.object('/groups/' + group_key);
        this.edit = true;
      } else {
        this.edit = false;
@@ -41,6 +56,11 @@ export class GroupPage {
         name: 'test6'
       }
     ];
+  }
+
+
+  test(){
+      
   }
 
 }

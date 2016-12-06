@@ -20,7 +20,12 @@ export class HomePage {
       if(!auth) {
         this.navCtrl.setRoot(LoginPage);
       } else {
-        
+     
+        // here we need to update database to get full info about user profile!!
+        let data = {
+          email: auth.auth.email
+        };
+        this.af.database.object('/users/' + this.af.auth.getAuth().uid).set(data);
       }
     }
     );

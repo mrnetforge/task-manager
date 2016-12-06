@@ -37,13 +37,13 @@
         </ion-card-content>
         <ion-row>
           <ion-col *ngIf="(type == 'my')">
-          <button ion-button icon-left clear small>
+          <button (click)="disconnectFromGroup(group.$key)" ion-button icon-left clear small>
               <ion-icon name="log-out"></ion-icon>
               <div>Zrezygnuj</div>
             </button>
           </ion-col>
           <ion-col *ngIf="(type == 'public')">
-          <button ion-button icon-left clear small>
+          <button (click)="joinToGroup(group.$key)" ion-button icon-left clear small>
               <ion-icon name="log-out"></ion-icon>
               <div>Dołącz</div>
             </button>

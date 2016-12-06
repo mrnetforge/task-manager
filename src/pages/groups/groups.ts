@@ -14,7 +14,6 @@ export class GroupsPage {
   type: string = "my";
   myInput: string = "";
   constructor(public af: AngularFire,public navCtrl: NavController) {
-    let uid = this.af.auth.getAuth().uid;
     this.groups_dummy = [
       {
         name: 'My Group1',
@@ -38,7 +37,20 @@ export class GroupsPage {
       this.groups.push(e);
     }.bind(this));
     */
-
+  }
+  joinToGroup(group_key){
+    // this method should be push to incjetable service so DRY!
+    let uid = this.af.auth.getAuth().uid;
+    let data = [];
+    data[uid] = true;
+    this.af.database.object('/groups/' + group_key + '/members/' + uid).set(true);
+  }
+  disconnectFromGroup(group_key){
+    // this method should be push to incjetable service so DRY!
+    let uid = this.af.auth.getAuth().uid;
+    let data = [];
+    data[uid] = false;
+    this.af.database.object('/groups/' + group_key + '/members/' + uid).set(false);
   }
   openGroupForm(group_key){
     this.navCtrl.push(GroupPage, {group_key: group_key});
