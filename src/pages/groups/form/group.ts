@@ -41,21 +41,6 @@ export class GroupPage {
   ionViewDidLoad() {
     console.log('Hello GroupPage');
     this.type = "basic"; // set default type
-    this.members = [
-      {
-        name: 'test'
-      },{
-        name: 'test2'
-      },{
-        name: 'test3'
-      },{
-        name: 'test4'
-      },{
-        name: 'test5'
-      },{
-        name: 'test6'
-      }
-    ];
   }
 
 
