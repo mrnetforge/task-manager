@@ -22,15 +22,20 @@
     <ion-list *ngSwitchCase="'basic'">
       <ion-item>
         <ion-label floating>Tytuł</ion-label>
-        <ion-input [ngModel]="group.name" type="text" value="" disabled="true"></ion-input>
+        <ion-input [ngModel]="group.name" type="text" value="" [disabled]="canEdit(group.creator)"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label floating>Opis</ion-label>
-        <ion-textarea rows="6" [ngModel]="group.description" disabled="true"></ion-textarea>
+        <ion-textarea rows="6" [ngModel]="group.description" [disabled]="canEdit(group.creator)"></ion-textarea>
       </ion-item>
+      <ion-item>
+        <button [disabled]="canEdit(group.creator)"ion-button color="light">Save</button>
+      </ion-item>
+
     </ion-list>
     <div *ngSwitchCase="'members'">
       <ion-list>
+        {{ group.membersList | json }}
   <ion-item-sliding *ngFor="let member of group.membersList">
     <ion-item>
       <ion-avatar item-left>
@@ -38,20 +43,10 @@
       </ion-avatar>
       <h2>{{ member.email }}</h2>
     </ion-item>
-    <ion-item-options side="left">
-      <button ion-button color="primary">
-        <ion-icon name="text"></ion-icon>
-        Text
-      </button>
-      <button ion-button color="secondary">
-        <ion-icon name="call"></ion-icon>
-        Call
-      </button>
-    </ion-item-options>
-    <ion-item-options side="right">
+    <ion-item-options [hidden]="(af.auth | async)?.uid == member.uid" side="right">
       <button ion-button color="primary">
         <ion-icon name="mail"></ion-icon>
-        Email
+        Remove
       </button>
     </ion-item-options>
   </ion-item-sliding>

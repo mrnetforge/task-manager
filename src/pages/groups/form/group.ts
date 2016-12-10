@@ -18,13 +18,18 @@ export class GroupPage {
      if(group_key) {
        this.af.database.object('/groups/' + group_key,{ preserveSnapshot: true }).subscribe(snapshot => {
          this.group = snapshot.val();
-         console.log(this.group);
-         if(this.group['members']){
+         var members = this.group['members'];
+  
+         if(members){
            this.group['membersList'] = [];
-          for (var key in this.group['members']) {
-            if(this.group['members'][key]){
+          for (var key in members) {
+           let my_key = key;
+            if(members[key]){
               this.af.database.object('/users/' + key,{ preserveSnapshot: true }).subscribe(snapshot => {
-                this.group['membersList'].push(snapshot.val());
+                let obj = snapshot.val();
+                
+                obj.uid = my_key;
+                this.group['membersList'].push(obj);
               });
             }
           }
@@ -43,9 +48,9 @@ export class GroupPage {
     this.type = "basic"; // set default type
   }
 
-
-  test(){
-      
+  canEdit(creatorUID){
+    return false;
   }
+
 
 }

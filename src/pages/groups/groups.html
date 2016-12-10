@@ -30,13 +30,16 @@
           <button (click)="openGroupForm(group.$key)" ion-button item-right clear small>
               <ion-icon name="share-alt"></ion-icon>
             </button>
+              <button ion-button item-right clear small>
+              Własciciel: {{ ((af.auth | async)?.uid == group.creator) ? 'Ty' : '' }}
+            </button>
         </ion-item>
 
         <ion-card-content>
           <p>Wait a minute. Wait a minute, Doc. Uhhh... Are you telling me that you built a time machine... out of a DeLorean?! Whoa. This is heavy.</p>
         </ion-card-content>
         <ion-row>
-          <ion-col *ngIf="(type == 'my')">
+          <ion-col *ngIf="(type == 'my' && (af.auth | async)?.uid != group.creator)">
           <button (click)="disconnectFromGroup(group.$key)" ion-button icon-left clear small>
               <ion-icon name="log-out"></ion-icon>
               <div>Zrezygnuj</div>
